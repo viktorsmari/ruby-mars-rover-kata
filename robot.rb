@@ -1,4 +1,6 @@
 
+DIR = {"N" => 0, "E" => 1, "S" => 2, "W" => 3 }
+
 # Read the input file into a variable
 input_file = File.read('./input.txt')
 
@@ -17,8 +19,6 @@ robots = myArr.each_slice(2).to_a
 # [["1 2 N", "LMLMLMLMM"], ["3 3 E", "MMRMMRMRRM"]]
 
 
-DIR = {"N" => 0, "E" => 1, "S" => 2, "W" => 3 }
-
 def move_robot(starting, instruction)
 
   # Change the starting string to an array
@@ -36,16 +36,22 @@ def move_robot(starting, instruction)
     when 'R'
       # When going left, your direction goes +1
       dir_key_number = (dir_key_number + 1) % 4
-      #puts 'RIGHT'
     when 'M'
-      #moving up +1 from north is the second letter increment
-      puts 'MOVE'
+      case startingArray[2]
+      when "N"
+        #moving up +1 from north is the second letter increment
+        startingArray[1] = startingArray[1].to_i + 1
+      when "S"
+        startingArray[1] = startingArray[1].to_i - 1
+      when "E"
+        startingArray[0] = startingArray[0].to_i + 1
+      when "W"
+        startingArray[0] = startingArray[0].to_i - 1
+      end
     end
     startingArray[2] = DIR.key(dir_key_number)
-    p startingArray[2]
   end
-  # Change the array back to a string
-  #p startingArray
+  # Print the array as a string
   puts startingArray.join(" ")
 end
 
