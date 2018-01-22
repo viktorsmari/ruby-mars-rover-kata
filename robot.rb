@@ -15,7 +15,25 @@ robots = myArr.each_slice(2).to_a
 
 #p myArr
 
+def move_robot(starting, instruction)
+  current_location = starting
+  p current_location
+  instruction.split("").each do |x|
+    case x
+    when 'L'
+      # TODO: use enums? N = 0, E = 1, S = 2, W = 3
+      # Left would mean direction -= 1
+      # Use modulus of 4?
+      # Check negative numbers
+      #puts 'LEFT'
+    when 'R'
+      #puts 'RIGHT'
+    when 'M'
+      #puts 'MOVE'
+    end
+  end
+end
+
 robots.each do |starting, instruction|
-  puts starting
-  puts instruction
+  move_robot(starting, instruction)
 end
