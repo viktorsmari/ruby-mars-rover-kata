@@ -1,5 +1,6 @@
 #!/usr/bin/ruby
 
+# Each direction has a number, so we can easily increment/decrement
 DIR = {"N" => 0, "E" => 1, "S" => 2, "W" => 3 }
 
 # Read the input file into a variable
@@ -15,7 +16,7 @@ grid_size = myArr.shift
 
 #puts 'Grid size: ' + grid_size
 
-# Put each robot into its own array, within the array
+# Put each robot into its own array, inside another array
 robots = myArr.each_slice(2).to_a
 # robots = [["1 2 N", "LMLMLMLMM"], ["3 3 E", "MMRMMRMRRM"]]
 
@@ -27,7 +28,7 @@ def move_robot(starting, instruction)
 
   instruction.split("").each do |x|
     # Current orientation is kept (as a letter) at: startingArray[2]
-    # Change it to a key (number) of 1..4
+    # Change it to a key (number) of 0..3
     dir_key_number = DIR[startingArray[2]]
 
     case x
@@ -35,7 +36,7 @@ def move_robot(starting, instruction)
       # When going left, your direction goes +3 (instead of -1 which fails with modulus)
       dir_key_number = (dir_key_number + 3) % 4
     when 'R'
-      # When going right, your DIRection goes +1
+      # When going right, your direction goes +1
       dir_key_number = (dir_key_number + 1) % 4
     when 'M'
       case startingArray[2]
@@ -56,6 +57,7 @@ def move_robot(starting, instruction)
   puts startingArray.join(" ")
 end
 
+# Move all robots, one by one
 robots.each do |starting, instruction|
   move_robot(starting, instruction)
 end
