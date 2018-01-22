@@ -1,3 +1,4 @@
+#!/usr/bin/ruby
 
 DIR = {"N" => 0, "E" => 1, "S" => 2, "W" => 3 }
 
@@ -6,23 +7,23 @@ input_file = File.read('./input.txt')
 
 # Separate each line into an array
 myArr = input_file.split("\n")
-#["5 5", "1 2 N", "LMLMLMLMM", "3 3 E", "MMRMMRMRRM"]
+# myArr = ["5 5", "1 2 N", "LMLMLMLMM", "3 3 E", "MMRMMRMRRM"]
 
 # The first number is the grid size, remove it to its own var
 grid_size = myArr.shift
-#["1 2 N", "LMLMLMLMM", "3 3 E", "MMRMMRMRRM"]
+# myArr = ["1 2 N", "LMLMLMLMM", "3 3 E", "MMRMMRMRRM"]
 
 #puts 'Grid size: ' + grid_size
 
 # Put each robot into its own array, within the array
 robots = myArr.each_slice(2).to_a
-# [["1 2 N", "LMLMLMLMM"], ["3 3 E", "MMRMMRMRRM"]]
-
+# robots = [["1 2 N", "LMLMLMLMM"], ["3 3 E", "MMRMMRMRRM"]]
 
 def move_robot(starting, instruction)
-
   # Change the starting string to an array
+  # "1 2 N"
   startingArray = starting.split
+  # ["1", "2", "N"]
 
   instruction.split("").each do |x|
     # Current orientation is kept (as a letter) at: startingArray[2]
@@ -34,7 +35,7 @@ def move_robot(starting, instruction)
       # When going left, your direction goes +3 (instead of -1 which fails with modulus)
       dir_key_number = (dir_key_number + 3) % 4
     when 'R'
-      # When going left, your direction goes +1
+      # When going right, your DIRection goes +1
       dir_key_number = (dir_key_number + 1) % 4
     when 'M'
       case startingArray[2]
@@ -51,12 +52,9 @@ def move_robot(starting, instruction)
     end
     startingArray[2] = DIR.key(dir_key_number)
   end
-  # Print the array as a string
+  # Print the final array as a string
   puts startingArray.join(" ")
 end
-
-# Robots array:
-#[["1 2 N", "LMLMLMLMM"], ["3 3 E", "MMRMMRMRRM"]]
 
 robots.each do |starting, instruction|
   move_robot(starting, instruction)
