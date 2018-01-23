@@ -25,7 +25,9 @@ RSpec.describe Nasa, "# We are the robots" do
     end
   end
 
-  context "get correct grid size" do
-    #puts n.grid_size
+  context "grid size" do
+    it "matches input" do
+      expect(n.grid).to eql ('5 5')
+    end
   end
 end

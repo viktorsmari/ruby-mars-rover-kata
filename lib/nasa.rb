@@ -4,6 +4,8 @@ class Nasa
   # Each direction has a number, so we can easily increment/decrement
   DIR = {"N" => 0, "E" => 1, "S" => 2, "W" => 3 }
 
+  attr_accessor :grid
+
   def get_data
     # Read the input file into a variable
     input_file = File.read('./input.txt')
@@ -13,7 +15,7 @@ class Nasa
     # myArr = ["5 5", "1 2 N", "LMLMLMLMM", "3 3 E", "MMRMMRMRRM"]
 
     # The first number is the grid size, remove it to its own var
-    grid_size = myArr.shift
+    @grid = myArr.shift
     # myArr = ["1 2 N", "LMLMLMLMM", "3 3 E", "MMRMMRMRRM"]
 
     #puts 'Grid size: ' + grid_size
