@@ -23,6 +23,17 @@ class Nasa
     # robots = [["1 2 N", "LMLMLMLMM"], ["3 3 E", "MMRMMRMRRM"]]
   end
 
+  def start_mission
+    robots = get_data
+    # Move all robots, one by one
+    result = []
+    robots.each do |starting, instruction|
+      result.push(move_robot(starting, instruction))
+    end
+
+    result
+  end
+
   def move_robot(starting, instruction)
     # Change the starting string to an array
     # "1 2 N"
@@ -60,10 +71,4 @@ class Nasa
     #puts startingArray.join(" ")
     return startingArray.join(" ")
   end
-
-  # Move all robots, one by one
-  #robots.each do |starting, instruction|
-    #n = Nasa.new
-    #n.move_robot(starting, instruction)
-  #end
 end

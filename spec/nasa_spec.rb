@@ -21,13 +21,7 @@ RSpec.describe Nasa, "# We are the robots" do
 
   context "moving multiple robots at once" do
     it "gets expected output" do
-      multiple = n.get_data
-
-      result = []
-      multiple.each do | starting, instruction|
-        result.push(n.move_robot(starting, instruction))
-      end
-      expect(result).to eql (["1 3 N", "5 1 E"])
+      expect(n.start_mission).to eql (["1 3 N", "5 1 E"])
     end
   end
 
