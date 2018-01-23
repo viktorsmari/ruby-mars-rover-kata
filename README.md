@@ -1,3 +1,3 @@
-Run with:
+Run tests with:
 
-`ruby robot.rb`
+`rspec`
