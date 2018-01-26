@@ -1,6 +1,6 @@
 class Rover
   attr_accessor :x, :y, :orientation, :grid
-  DIR = { 'N' => 0, 'E' => 1, 'S' => 2, 'W' => 3 }
+  DIR = { 'N' => 0, 'E' => 1, 'S' => 2, 'W' => 3 }.freeze
 
   def initialize(tmpgrid)
     @grid = tmpgrid
@@ -10,8 +10,6 @@ class Rover
   end
 
   def move_robot(starting, instruction)
-    # Change the starting string to an array
-    # "1 2 N"
     @x = starting[0]
     @y = starting[2]
     @orientation = starting[4]
