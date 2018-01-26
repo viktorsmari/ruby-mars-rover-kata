@@ -1,6 +1,6 @@
 class Rover
-  attr_accessor :x,:y, :orientation, :grid
-  DIR = {"N" => 0, "E" => 1, "S" => 2, "W" => 3 }
+  attr_accessor :x, :y, :orientation, :grid
+  DIR = { 'N' => 0, 'E' => 1, 'S' => 2, 'W' => 3 }
 
   def initialize(tmpgrid)
     @grid = tmpgrid
@@ -16,7 +16,7 @@ class Rover
     @y = starting[2]
     @orientation = starting[4]
 
-    instruction.split("").each do |x|
+    instruction.split('').each do |x|
       # Change it to a key (number) of 0..3
       dir_key_number = DIR[@orientation]
 
@@ -29,21 +29,19 @@ class Rover
         dir_key_number = (dir_key_number + 1) % 4
       when 'M'
         case @orientation
-        when "N"
-          #moving up +1 from north is the second letter increment
+        when 'N'
+          # moving up +1 from north is the second letter increment
           @y = @y.to_i + 1
-        when "S"
+        when 'S'
           @y = @y.to_i - 1
-        when "E"
+        when 'E'
           @x = @x.to_i + 1
-        when "W"
+        when 'W'
           @x = @x.to_i - 1
         end
       end
       @orientation = DIR.key(dir_key_number)
     end
-    # Print the final array as a string
-    #puts startingArray.join(" ")
-    return "#{@x} #{@y} #{@orientation}"
+    "#{@x} #{@y} #{@orientation}"
   end
 end
