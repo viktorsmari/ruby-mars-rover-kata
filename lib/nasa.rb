@@ -1,8 +1,6 @@
-#!/usr/bin/ruby
-
+require 'rover'
 class Nasa
   # Each direction has a number, so we can easily increment/decrement
-  DIR = {"N" => 0, "E" => 1, "S" => 2, "W" => 3 }
 
   attr_accessor :grid
 
@@ -25,52 +23,25 @@ class Nasa
     # robots = [["1 2 N", "LMLMLMLMM"], ["3 3 E", "MMRMMRMRRM"]]
   end
 
-  def start_mission
+  def mission(input_string)
+    tmpgrid = input_string.shift
+
+    result = []
+    robots = input_string.each_slice(2).to_a
+    robots.each do |starting, instruction|
+      result.push(Rover.new(tmpgrid).move_robot(starting, instruction))
+    end
+    result
+  end
+
+  def mission_from_file
     robots = get_data
     # Move all robots, one by one
     result = []
     robots.each do |starting, instruction|
-      result.push(move_robot(starting, instruction))
+      result.push(Rover.new.move_robot(starting, instruction))
     end
 
     result
-  end
-
-  def move_robot(starting, instruction)
-    # Change the starting string to an array
-    # "1 2 N"
-    startingArray = starting.split
-    # ["1", "2", "N"]
-
-    instruction.split("").each do |x|
-      # Current orientation is kept (as a letter) at: startingArray[2]
-      # Change it to a key (number) of 0..3
-      dir_key_number = DIR[startingArray[2]]
-
-      case x
-      when 'L'
-        # When going left, your direction goes +3 (instead of -1 which fails with modulus)
-        dir_key_number = (dir_key_number + 3) % 4
-      when 'R'
-        # When going right, your direction goes +1
-        dir_key_number = (dir_key_number + 1) % 4
-      when 'M'
-        case startingArray[2]
-        when "N"
-          #moving up +1 from north is the second letter increment
-          startingArray[1] = startingArray[1].to_i + 1
-        when "S"
-          startingArray[1] = startingArray[1].to_i - 1
-        when "E"
-          startingArray[0] = startingArray[0].to_i + 1
-        when "W"
-          startingArray[0] = startingArray[0].to_i - 1
-        end
-      end
-      startingArray[2] = DIR.key(dir_key_number)
-    end
-    # Print the final array as a string
-    #puts startingArray.join(" ")
-    return startingArray.join(" ")
   end
 end
