@@ -9,24 +9,28 @@ class Rover
     @y = 0
   end
 
-  def check_bounds_y_pos
-    @y != @grid.split[1].to_i
+  def move_north
+    # moving up +1 from north is the second grid increment
+    @y = @y.to_i + 1 if @y != @grid.split[1].to_i
   end
-  def check_bounds_y_neg
-    @y != 0
+
+  def move_south
+    @y = @y.to_i - 1 if @y != 0
   end
-  def check_bounds_x_pos
-    @x.to_i != @grid.split[0].to_i
+
+  def move_east
+    @x = @x.to_i + 1 if @x.to_i != @grid.split[0].to_i
   end
-  def check_bounds_x_neg
-    @x.to_i != 0
+
+  def move_west
+    @x = @x.to_i - 1 if @x.to_i != 0
   end
 
   def move_robot(starting, instruction)
-    startingArray = starting.split()
-    @x = startingArray[0]
-    @y = startingArray[1]
-    @orientation = startingArray[2]
+    starting_array = starting.split
+    @x = starting_array[0]
+    @y = starting_array[1]
+    @orientation = starting_array[2]
 
     instruction.split('').each do |x|
       # Change it to a key (number) of 0..3
@@ -42,14 +46,13 @@ class Rover
       when 'M'
         case @orientation
         when 'N'
-          # moving up +1 from north is the second letter increment
-          @y = @y.to_i + 1 if check_bounds_y_pos
+          move_north
         when 'S'
-          @y = @y.to_i - 1 if check_bounds_y_neg
+          move_south
         when 'E'
-          @x = @x.to_i + 1 if check_bounds_x_pos
+          move_east
         when 'W'
-          @x = @x.to_i - 1 if check_bounds_x_neg
+          move_west
         end
       end
       @orientation = DIR.key(dir_key_number)
