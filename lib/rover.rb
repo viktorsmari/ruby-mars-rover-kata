@@ -9,11 +9,17 @@ class Rover
     @y = 0
   end
 
-  def check_bounds_y
+  def check_bounds_y_pos
     @y != @grid.split[1].to_i
   end
-  def check_bounds_x
-    @x != @grid.split[0].to_i
+  def check_bounds_y_neg
+    @y != 0
+  end
+  def check_bounds_x_pos
+    @x.to_i != @grid.split[0].to_i
+  end
+  def check_bounds_x_neg
+    @x.to_i != 0
   end
 
   def move_robot(starting, instruction)
@@ -37,13 +43,13 @@ class Rover
         case @orientation
         when 'N'
           # moving up +1 from north is the second letter increment
-          @y = @y.to_i + 1 if check_bounds_y
+          @y = @y.to_i + 1 if check_bounds_y_pos
         when 'S'
-          @y = @y.to_i - 1 if check_bounds_y
+          @y = @y.to_i - 1 if check_bounds_y_neg
         when 'E'
-          @x = @x.to_i + 1 if check_bounds_x
+          @x = @x.to_i + 1 if check_bounds_x_pos
         when 'W'
-          @x = @x.to_i - 1 if check_bounds_x
+          @x = @x.to_i - 1 if check_bounds_x_neg
         end
       end
       @orientation = DIR.key(dir_key_number)
