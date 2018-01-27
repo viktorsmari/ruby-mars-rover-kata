@@ -25,4 +25,12 @@ RSpec.describe Nasa, '# We are the robots' do
       expect(@n.mission(['1000 1000', '100 2 N', 'LMLMLMLMM'])).to eql (['100 3 N'])
     end
   end
+  context 'going off grid' do
+    it "cannot go off grid North" do
+      expect(@n.mission(['5 5', '1 2 N', 'MMMMM'])).to eql (['1 5 N'])
+    end
+    it "cannot go off grid East" do
+      expect(@n.mission(['5 5', '1 2 E', 'MMMMM'])).to eql (['5 2 E'])
+    end
+  end
 end
