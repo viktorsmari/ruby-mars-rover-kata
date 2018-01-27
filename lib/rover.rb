@@ -10,9 +10,10 @@ class Rover
   end
 
   def move_robot(starting, instruction)
-    @x = starting[0]
-    @y = starting[2]
-    @orientation = starting[4]
+    startingArray = starting.split()
+    @x = startingArray[0]
+    @y = startingArray[1]
+    @orientation = startingArray[2]
 
     instruction.split('').each do |x|
       # Change it to a key (number) of 0..3

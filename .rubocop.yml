@@ -76,7 +76,7 @@ Metrics/LineLength:
 # Offense count: 1
 # Configuration parameters: CountComments.
 Metrics/MethodLength:
-  Max: 23
+  Max: 30
 
 # Offense count: 1
 Naming/AccessorMethodName:

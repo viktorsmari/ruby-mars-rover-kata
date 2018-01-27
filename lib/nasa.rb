@@ -1,7 +1,5 @@
 require 'rover'
 class Nasa
-  # Each direction has a number, so we can easily increment/decrement
-
   attr_accessor :grid
 
   def mission(input_string)
